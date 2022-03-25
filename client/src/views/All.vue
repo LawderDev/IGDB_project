@@ -1,24 +1,23 @@
 <template>
         <router-link
-            v-for="quote in quotes"
-            :key="quote._id"
-            :to="`/quote/${quote._id}`">
+            v-for="user in users"
+            :key="user._id"
+            :to="`/quote/${user._id}`">
             <p class="bg-gray-200 my-5 text-lg text-center text-gray-500">
-              <span>"{{ quote.content }}"</span><br>
-              <span class="text-gray-400"> {{ quote.author }}</span>
+              <span>"{{ user.name }}"</span><br>
             </p>
         </router-link>
 </template>
 
 <script setup lang="ts">
-import useQuotesServices from '../services/quotes.services'
+import useUsersServices from '../services/users.services'
 import {onMounted, ref} from "vue";
-const {getAll} = useQuotesServices()
-import {Quote} from "../types/QuoteType";
+const {getAll} = useUsersServices()
+import {User} from "../types/UserType";
 
-let quotes = ref(Array<Quote>())
+let users = ref(Array<User>())
 onMounted(() =>
-  getAll().then((res) => quotes.value = res.data).catch((err) => console.log(err))
+  getAll().then((res) => users.value = res.data).catch((err) => console.log(err))
 )
 
 </script>

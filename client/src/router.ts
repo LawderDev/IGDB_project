@@ -1,6 +1,6 @@
 import Home from "./views/Home.vue";
 import All from "./views/All.vue";
-import Quote from "./views/Quote.vue";
+import Quote from "./views/User.vue";
 import { createWebHistory, createRouter } from "vue-router";
 import { RouteRecordRaw } from "vue-router";
 
