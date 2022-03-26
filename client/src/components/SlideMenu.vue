@@ -5,37 +5,49 @@ import {ref} from "vue";
 
 const slider = ref({} as HTMLElement)
 
-const performSlider = () => slider && (slider.value.style.left = '0')
-const closeSlider = () => slider && (slider.value.style.left = '-1000px')
+const isOpen = ref(false)
+const performSlider = () => {
+  if(!slider) return
+  slider.value.style.left = isOpen.value ? '-110vw' : '0'
+  isOpen.value = !isOpen.value
+}
 </script>
 
 <template>
   <div>
-    <div class="w-10 flex flex-col gap-y-2 cursor-pointer" @click="performSlider">
-      <div class="w-8 h-1 bg-gradient-to-r from-[#F18303] to-[#F94409]"></div>
-      <div class="w-6 h-1 bg-gradient-to-r from-[#F18303] to-[#F94409]"></div>
-      <div class="w-8 h-1 bg-gradient-to-r from-[#F18303] to-[#F94409]"></div>
+    <div class="w-10 flex flex-col gap-y-2 cursor-pointer z-40 relative" @click="performSlider()">
+      <div class="w-[42px] h-[6px] bg-gradient-to-r from-[#F18303] to-[#F94409]"></div>
+      <div class="w-[29px] h-[6px] bg-gradient-to-r from-[#F18303] to-[#F94409]"></div>
+      <div class="w-[42 px] h-[6px] bg-gradient-to-r from-[#F18303] to-[#F94409]"></div>
     </div>
 
-    <div ref="slider" class="backdrop-blur-sm absolute transition-[left] duration-500 left-[-1000px] w-screen h-screen left-0 top-0 bg-opacity-90 bg-[#303234]">
-      <div class="text-5xl pl-10 mt-10" @click="closeSlider">X</div>
-      <ul class="mt-10 pb-10 pl-10 text-5xl flex flex-col gap-y-8 border-b-2 border-[#6B6B6B]">
-        <li>Accueil</li>
-        <li>Accueil</li>
-        <li>Accueil</li>
-        <li>Accueil</li>
-      </ul>
+    <div ref="slider" class="sm:w-[20vw] backdrop-blur-sm absolute transition-[left] duration-500 left-[-150vw] ease-in-out w-screen h-screen top-0 bg-opacity-90 bg-[#303234]">
+        <div>
+        <ul class="mt-24 pb-10 pl-7 text-5xl flex flex-col gap-y-8 text-4xl">
+          <li>
+            <a class="item-menu" href="">Accueil</a>
+          </li>
+          <li>
+            <a class="item-menu" href="">Accueil</a>
+          </li>
+          <li>
+            <a class="item-menu" href="">Accueil</a>
+          </li>
+          <li>
+            <a class="item-menu" href="">Accueil</a>
+          </li>
+        </ul>
 
+        <ul class="ml-10 pt-8 flex text-5xl gap-x-8 border-t-2 border-[#6B6B6B] w-[70%] text-4xl">
+          <li>F</li>
+          <li>I</li>
+          <li>Ln</li>
+        </ul>
 
-      <ul class="pl-10 pt-8 flex text-5xl gap-x-8">
-        <li>F</li>
-        <li>I</li>
-        <li>Ln</li>
-      </ul>
-
-      <div class="pl-10 pt-8 flex text-5xl gap-x-8 relative">
-        <secondary-button label="Connexion"></secondary-button>
-        <primary-button label="Inscription"></primary-button>
+        <div class="pl-10 pt-8 flex text-5xl gap-x-8 relative">
+          <secondary-button>Connexion</secondary-button>
+          <primary-button>Inscription</primary-button>
+        </div>
       </div>
     </div>
   </div>
@@ -43,12 +55,18 @@ const closeSlider = () => slider && (slider.value.style.left = '-1000px')
 
 
 <style scoped>
-#container-options{
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 0;
-  transition: 550ms width ease-in-out;
+.item-menu{
+  @apply before:inline-block
+  before:w-0
+  before:mr-3
+  before:h-5
+  before:relative
+  before:bg-gradient-to-r
+  before:from-[#F18303]
+  before:to-[#F94409]
+  before:rounded-full
+  before:transition-[width]
+  before:ease-in-out
+  hover:before:w-5
 }
-
 </style>
