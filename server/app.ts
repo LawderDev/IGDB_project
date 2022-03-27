@@ -3,6 +3,7 @@ import { connect } from "mongoose"
 import bodyParser from "body-parser"
 import cors from "cors"
 import usersController from './controllers/UsersController'
+import igdbController from './controllers/IgdbController'
 const app = express()
 
 app.use(bodyParser.json())
@@ -27,3 +28,4 @@ const corsOptions ={
 
 app.use(cors(corsOptions))
 app.use('/users', usersController)
+app.use('/igdb', igdbController)
