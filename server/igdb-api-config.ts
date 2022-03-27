@@ -6,6 +6,7 @@ const typeToken = 'Bearer'
 export default axios.create({
     baseURL: "https://api.igdb.com/v4/games",
     headers: {
+        "Content-Type": "text/plain",
         'Origin':"https://api.igdb.com/v4/games",
         'Accept': 'application/json',
         'Client-ID': idIgdb,
