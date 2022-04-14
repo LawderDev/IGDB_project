@@ -16,7 +16,7 @@
   w-32 h-10
   text-center
   rounded-full
-  z-10
+  z-0
   bg-gradient-to-r from-[#F18303] to-[#F94409]
   before:content-['']
   before:absolute

@@ -21,4 +21,12 @@ igdbController.post('/mostRatings', async (request, result) => {
     result.json((await igdbApi.post('/', requestString)).data)
 })
 
+igdbController.post('/lastReleased', async (request, result) => {
+    const requestString = `fields name,rating,cover.url,first_release_date;
+                           sort rating desc;
+                           where first_release_date >= ${dayjs().unix()};   
+                           limit:${request.body['limit']};`
+    result.json((await igdbApi.post('/', requestString)).data)
+})
+
 export default igdbController
