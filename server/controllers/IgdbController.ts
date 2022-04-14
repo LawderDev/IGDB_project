@@ -1,32 +1,36 @@
 import express from "express";
-import igdbApi from "../igdb-api-config";
+import {httpDate, httpGame} from "../igdb-api-config";
 import dayjs from "dayjs"
 const igdbController = express.Router()
 
 igdbController.post('/', async (request, result) => {
-    result.json((await igdbApi.post('/', 'fields *;')).data)
+    result.json((await httpGame.post('/', 'fields *;')).data)
 })
 
-const mod = (n:number, m:number) => ((n % m) + m) % m
-
 igdbController.post('/mostRatings', async (request, result) => {
-    let year = dayjs().get('year')
-    let day = '01'
-    let mount = mod(dayjs().get('month')-2,12)
-    let date = `${year}-${day}-${mount}`
-    const requestString = `fields name,rating,cover.url,first_release_date;
-                           sort rating desc;
-                           where rating != null & first_release_date >= ${dayjs(date).unix()};   
+    let dateNow = dayjs().subtract(3, 'month')
+    const requestString = `fields name,total_rating,cover.url,first_release_date;
+                           sort total_rating desc;
+                           where total_rating != null & first_release_date >= ${dateNow.unix()};   
                            limit:${request.body['limit']};`
-    result.json((await igdbApi.post('/', requestString)).data)
+    result.json((await httpGame.post('/', requestString)).data)
 })
 
 igdbController.post('/lastReleased', async (request, result) => {
-    const requestString = `fields name,rating,cover.url,first_release_date;
-                           sort rating desc;
-                           where first_release_date >= ${dayjs().unix()};   
+    const requestString = `fields game.name,game.total_rating,game.cover.url,game.status, date;
+                           where date <= ${dayjs().unix()} & platform = (6);
+                           sort date desc;
                            limit:${request.body['limit']};`
-    result.json((await igdbApi.post('/', requestString)).data)
+    result.json((await httpDate.post('/', requestString)).data)
 })
+
+igdbController.post('/mostHyping', async (request, result) => {
+    const requestString = `fields name,rating,hypes,status,cover.url,first_release_date;
+                           sort hypes desc;
+                           where hypes != null & status > 0 & status <=5;   
+                           limit:${request.body['limit']};`
+    result.json((await httpGame.post('/', requestString)).data)
+})
+
 
 export default igdbController
