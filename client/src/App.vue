@@ -11,7 +11,7 @@ import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
     <div class="sm:gap-x-0 flex gap-x-12 mt-5 items-center">
       <slide-menu class="absolute z-10 top-0 pl-5 pt-7"></slide-menu>
       <user-greeting class="sm:mx-auto ml-[25vw]"></user-greeting>
-      <div class="lg:flex sm:gap-x-8 absolute right-8 hidden">
+      <div class="lg:flex sm:gap-x-8 absolute left-[83vw] hidden">
         <secondary-button>Connexion</secondary-button>
         <primary-button>Inscription</primary-button>
       </div>
@@ -32,6 +32,28 @@ import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
 html{
   background: #303234;
   margin:0;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #5c5c5c #303234;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 13px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #303234;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #5c5c5c;
+  border-radius: 12px;
+  border: 3px solid #303234;
 }
 
 </style>

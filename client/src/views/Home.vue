@@ -14,7 +14,7 @@ onMounted(() => {
   getMostRatingGames(10).then((res) => listTopVideoGames.value = res.data)
   getLastReleasedGames(10).then((res) => {
     let tab = []
-    console.log(res.data)
+    //console.log(res.data)
     res.data.forEach((d) => {
       tab.push(d.game)
     })
@@ -26,9 +26,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <slide-games :title="'top du moment'" :list-games="listTopVideoGames" :num-slide="0"></slide-games>
+  <slide-games :title="'top du moment'" :list-games="listTopVideoGames" :id-slide="0"></slide-games>
   <slide-games :title="'nouvelles sorties'" :list-games="listLastReleasedVideoGames" :id-slide="1"></slide-games>
-  <slide-games :title="'les plus attendus'" :list-games="listHypesVideoGames" :id-slide="2"></slide-games>
 </template>
 
 <style scoped>

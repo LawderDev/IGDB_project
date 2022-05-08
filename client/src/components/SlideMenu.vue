@@ -21,7 +21,7 @@ const performSlider = () => {
       <div class="w-[42 px] h-[6px] bg-gradient-to-r from-[#F18303] to-[#F94409]"></div>
     </div>
 
-    <div ref="slider" class="sm:w-[20vw] backdrop-blur-sm absolute transition-[left] duration-500 left-[-150vw] ease-in-out w-screen h-screen top-0 bg-opacity-90 bg-[#303234]">
+    <div ref="slider" class="sm:w-[20vw] backdrop-blur-sm fixed transition-[left] duration-500 left-[-150vw] ease-in-out w-screen h-screen top-0 bg-opacity-90 bg-[#303234]">
         <div>
         <ul class="mt-24 pb-10 pl-7 text-5xl flex flex-col gap-y-8 text-4xl">
           <li>
