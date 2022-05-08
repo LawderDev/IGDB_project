@@ -9,6 +9,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {ref} from "vue";
 
+defineEmits(['selectedGame'])
+
 const props = defineProps({
   idSlide: Number,
   listGames: {},
@@ -16,7 +18,6 @@ const props = defineProps({
 })
 
 const resetSwipe = ref(false)
-
 
 const resetPagination = (swiper) => {
   if (!swiper) return
@@ -29,9 +30,6 @@ const openModal = ref(false);
 
 <template>
   <div class="sm:mt-16">
-    <div class="mr-10">
-    <game-modal :open="openModal" @closeModal="openModal = false"></game-modal>
-    </div>
     <h2 class="sm:ml-20 sm:mb-5 sm:text-2xl text-[20px] mt-5 mb-2 ml-5">{{ title }}</h2>
     <div class="sm:gap-x-10 sm:px-20 flex px-5 justify-center items-center mx-auto gap-x-4">
       <button :class="'prevArrow' + idSlide" class="sm:left-4 rounded-[18.75px] text-black text-4xl absolute left-1 w-[45px] h-[45px] bg-gradient-to-r from-[#F18303] to-[#F94409] z-10" >&lt;</button>
@@ -58,7 +56,7 @@ const openModal = ref(false);
           }"
           class="mySwiper"
       >
-        <swiper-slide v-for="(vg) in props.listGames" class="slide-covers text-center flex items-center justify-center cursor-pointer" @click="openModal = true">
+        <swiper-slide v-for="(vg) in props.listGames" class="slide-covers text-center flex items-center justify-center cursor-pointer" @click="$emit('selectedGame', vg.id)">
           <img class="rounded-3xl img-cover" v-if="vg.cover" :src="vg.cover.url.replace('t_thumb', 't_720p')" :alt="vg.name"/>
           <img v-else class="img-cover" :alt="vg.name" src=""/>
           <span class="img-name absolute z-10 hidden">{{ vg.name }}</span>
