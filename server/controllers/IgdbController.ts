@@ -7,6 +7,10 @@ igdbController.post('/', async (request, result) => {
     result.json((await httpGame.post('/', 'fields *;')).data)
 })
 
+igdbController.post('/games', async (request, result) => {
+    result.json((await httpGame.post('/', `fields name, genres.name, platforms.name, artworks.url,first_release_date,involved_companies.company.name, summary, total_rating; where id = ${request.body['id']};`)).data)
+})
+
 igdbController.post('/mostRatings', async (request, result) => {
     let dateNow = dayjs().subtract(3, 'month')
     const requestString = `fields name,total_rating,cover.url,first_release_date;
