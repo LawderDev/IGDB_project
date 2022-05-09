@@ -22,46 +22,40 @@
                          leave="ease-in duration-200"
                          leave-from="opacity-100 translate-y-0 sm:scale-100"
                          leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-          <div class="relative inline-block align-bottom bg-[#303234] rounded-3xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-            <div class="pb-4 sm:p-6 sm:pb-4 text-white">
-              <div class="sm:flex sm:items-start text-md">
-                <div class="max-h-[25vh] overflow-hidden rounded-3xl">
-                  <img class="" v-if="state.game.artworks" :src="state.game.artworks[0].url.replace('t_thumb', 't_1080p')" :alt="state.game.id"/>
-                </div>
+          <div class="relative inline-block align-bottom bg-[#303234] rounded-3xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-[90vw]">
+            <div class="pb-4 text-white">
+              <div class="text-md sm:text-lg">
                 <div class="absolute">
-                  <div class="relative left-72 top-[-3rem] flex items-center justify-center ">
-                    <svg class="transform-rotate-90 w-24 h-24">
-                      <defs>
-                        <linearGradient id="gradient-circle">
-                          <stop offset="0%" stop-color="#F18303" />
-                          <stop offset="100%" stop-color="#F94409" />
-                        </linearGradient>
-                      </defs>
-                      <circle cx="48" cy="48" r="45" stroke="currentColor" stroke-width="5" fill="#303234"
-                              class="text-gray-700" />
-
-                      <circle cx="48" cy="48" r="45" stroke="url(#gradient-circle)" stroke-width="5" fill="transparent"
-                              :stroke-dasharray="280"
-                              :stroke-dashoffset="280 - 90 / 100 * 280"
-                              class="text-blue-500 " />
-                    </svg>
-                    <span class="absolute text-2xl">{{ `${Math.round(state.game.total_rating*10)/10}%` }}</span>
-                  </div>
+                  <button @click="$emit('closeModal')" class="relative left-[82vw] lg:left-[85vw] xl:left-[87vw] top-3">
+                    <font-awesome-icon :icon="['fas', 'xmark']" size="3x" class="icon-gradient" />
+                  </button>
+                </div>
+                <div class="max-h-[25vh] sm:max-h-[35vh] overflow-hidden rounded-3xl">
+                  <img class="w-full" v-if="state.game.artworks" :src="state.game.artworks[0].url.replace('t_thumb', 't_1080p')" :alt="state.game.id"/>
+                  <div class="h-[35vh] bg-gray-600 flex items-center justify-center" v-else>Aucun artwork disponible</div>
                 </div>
 
-                <div class="px-4 mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+                <div class="absolute">
+                  <rates-circle :rate="Math.round(state.game.total_rating*10/10)" class="relative sm:left-[77vw] left-[65vw] top-[-3rem] flex items-center justify-center text-md sm:text-lg"></rates-circle>
+                </div>
+
+                <div class="px-4 sm:px-10 mt-3">
                   <div class="border-b border-gray-400">
                     <div class="flex">
-                      <div>
-                        <DialogTitle as="h3" class="text-xl leading-6 font-medium"> {{ state.game.name }} </DialogTitle>
+                      <div class="sm:w-[55vw] lg:w-[60vw] pb-3">
+                        <DialogTitle as="h3" class="text-xl sm:text-2xl leading-6 font-medium"> {{ state.game.name }} </DialogTitle>
                         <p>{{ formatReleasedDate() }}</p>
                         <p v-if="state.game.involved_companies" class="italic">{{ state.game.involved_companies[0].company.name }}</p>
                         <p><span class="text-slate-400">Support: </span>{{ formatInlineTab(state.game.platforms, ',') }}</p>
                         <p><span class="text-slate-400">Genres: </span>{{ formatInlineTab(state.game.genres, '/') }}</p>
                       </div>
-                      <div class="flex justify-center items-center gap-x-6 mr-2 pl-14">
-                        <p>test</p>
-                        <p>test</p>
+                      <div class="flex justify-center items-center gap-x-6 mr-2 sm:pl-[10vw]">
+                        <button>
+                          <font-awesome-icon :icon="['far', 'bookmark']" size="2x" class="icon-gradient" />
+                        </button>
+                        <button>
+                          <font-awesome-icon :icon="['far', 'heart']"  size="2x" class="icon-gradient" />
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -75,9 +69,9 @@
               </div>
 
             </div>
-            <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" @click="open = false">Deactivate</button>
-              <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" @click="$emit('closeModal')" ref="cancelButtonRef">Cancel</button>
+            <div class="flex items-center justify-center gap-16 text-md sm:text-lg mb-5">
+              <toggle-switch title="En cours de jeu"></toggle-switch>
+              <toggle-switch title="Jeu terminé"></toggle-switch>
             </div>
           </div>
         </TransitionChild>
@@ -88,11 +82,14 @@
 
 <script setup lang="ts">
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { ExclamationIcon } from '@heroicons/vue/outline'
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {reactive, watch} from "vue";
+import RatesCircle from "@/components/RatesCircle.vue";
+import ToggleSwitch from "@/components/ToggleSwitch.vue";
 const { getGameById } = useIgdbServices()
 import dayjs from "dayjs"
 import useIgdbServices from "@/services/igdb.services";
+import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
 
 const props = defineProps({
   open: Boolean,
@@ -123,6 +120,12 @@ const formatInlineTab = (tab:[], separator:string) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.icon-gradient path{
+  @apply fill-[url(#gradient-circle)];
+}
 
+#close-button{
+  @apply w-full h-10 text-lg
+}
 </style>

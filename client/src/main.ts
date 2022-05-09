@@ -3,16 +3,13 @@ import App from './App.vue'
 import { store } from './store'
 import './index.css'
 import router from './router';
-import cors from "cors"
-/*
-const corsOptions ={
-    origin:'*',
-    credentials:true,
-    optionSuccessStatus:200,
-}*/
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faBookmark, faHeart, faXmark);
 
 const app = createApp(App)
-//app.use(cors(corsOptions))
 app.use(store)
 app.use(router);
 
