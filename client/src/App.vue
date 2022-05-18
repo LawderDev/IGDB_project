@@ -19,6 +19,14 @@ import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
     </div>
       <search-bar class="sm:mt-16 mt-10"></search-bar>
     <router-view />
+    <svg  class="invisible absolute">
+      <defs>
+        <linearGradient id="gradient-circle">
+          <stop offset="0%" stop-color="#F18303" />
+          <stop offset="100%" stop-color="#F94409" />
+        </linearGradient>
+      </defs>
+    </svg>
   </div>
 </template>
 

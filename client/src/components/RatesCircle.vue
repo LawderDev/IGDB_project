@@ -1,12 +1,6 @@
 <template>
   <div>
     <svg class="transform-rotate-90 w-24 h-24">
-      <defs>
-        <linearGradient id="gradient-circle">
-          <stop offset="0%" stop-color="#F18303" />
-          <stop offset="100%" stop-color="#F94409" />
-        </linearGradient>
-      </defs>
       <circle cx="48" cy="48" r="45" stroke="currentColor" stroke-width="5" fill="#303234"
               class="text-gray-700" />
 

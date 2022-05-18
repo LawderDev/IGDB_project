@@ -4,10 +4,10 @@ import { store } from './store'
 import './index.css'
 import router from './router';
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faBookmark, faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faHeart, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { faXmark, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faBookmark, faHeart, faXmark);
+library.add(faBookmark, faHeart, faPenToSquare, faTriangleExclamation, faXmark);
 
 const app = createApp(App)
 app.use(store)
