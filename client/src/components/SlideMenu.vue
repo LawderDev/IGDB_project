@@ -25,7 +25,7 @@ const performSlider = () => {
         <div>
         <ul class="mt-24 pb-10 pl-7 text-5xl flex flex-col gap-y-8 text-4xl">
           <li>
-            <a class="item-menu" href="">Accueil</a>
+            <router-link class="item-menu" to="/">Accueil</router-link>
           </li>
           <li>
             <a class="item-menu" href="">Accueil</a>

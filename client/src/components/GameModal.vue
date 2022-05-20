@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto" @close="$emit('closeModal')">
+  <TransitionRoot as="template" :show="store.state.openGameModal">
+    <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto" @close="store.state.openGameModal = false">
       <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <TransitionChild as="template"
                          enter="ease-out duration-300"
@@ -27,7 +27,7 @@
               <div class="pb-4 text-white">
                 <div class="text-md sm:text-lg">
                   <div class="absolute">
-                    <button @click="$emit('closeModal')" class="relative left-[82vw] lg:left-[85vw] xl:left-[87vw] top-3">
+                    <button @click="store.state.openGameModal = false" class="relative left-[82vw] lg:left-[85vw] xl:left-[87vw] top-3">
                       <font-awesome-icon :icon="['fas', 'xmark']" size="3x" class="icon-gradient" />
                     </button>
                   </div>
@@ -91,11 +91,7 @@ const { getGameById } = useIgdbServices()
 import dayjs from "dayjs"
 import useIgdbServices from "@/services/igdb.services";
 import SpinnerLoading from "@/components/SpinnerLoading.vue"
-
-const props = defineProps({
-  open: Boolean,
-  id: Number,
-})
+import {store} from "@/store";
 
 defineEmits(['closeModal'])
 
@@ -105,7 +101,7 @@ const state = reactive({
 })
 
 
-watch(() => props.id, (newId) => {
+watch(() => store.state.selectedGame, (newId) => {
   state.loading = true
   getGameById(newId as number).then((res) => {
     state.game = res.data[0]

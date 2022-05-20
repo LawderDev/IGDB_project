@@ -4,6 +4,7 @@ import UserGreeting from '@/components/UserGreeting.vue'
 import SearchBar from '@/components/SearchBar.vue'
 import PrimaryButton from "@/components/buttons/PrimaryButton.vue";
 import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
+import GameModal from "@/components/GameModal.vue"
 </script>
 
 <template>
@@ -17,7 +18,8 @@ import SecondaryButton from "@/components/buttons/SecondaryButton.vue";
       </div>
 
     </div>
-      <search-bar class="sm:mt-16 mt-10"></search-bar>
+    <search-bar class="sm:mt-16 mt-10"></search-bar>
+    <game-modal></game-modal>
     <router-view />
     <svg  class="invisible absolute">
       <defs>

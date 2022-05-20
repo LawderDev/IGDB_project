@@ -1,5 +1,4 @@
 <template>
-  <game-modal :open="openModal" :id="selectedGameId" @closeModal="openModal = false"></game-modal>
   <slide-games :title="'top du moment'" :list-games="listTopVideoGames" :id-slide="0" @selectedGame="selectGame"></slide-games>
   <slide-games :title="'nouvelles sorties'" :list-games="listLastReleasedVideoGames" :id-slide="1" @selectedGame="selectGame"></slide-games>
 </template>

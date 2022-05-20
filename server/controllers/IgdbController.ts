@@ -4,7 +4,9 @@ import dayjs from "dayjs"
 const igdbController = express.Router()
 
 igdbController.post('/', async (request, result) => {
-    result.json((await httpGame.post('/', 'fields *;')).data)
+    const requestString = `fields name,total_rating,cover.url,first_release_date;
+                            where name ~ "${request.body['search']}"*;`
+    result.json((await httpGame.post('/', requestString)).data)
 })
 
 igdbController.post('/games', async (request, result) => {
