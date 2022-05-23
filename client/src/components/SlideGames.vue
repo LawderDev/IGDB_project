@@ -60,10 +60,10 @@ const openModal = (id:number) =>{
           }"
           class="mySwiper"
       >
-        <swiper-slide v-for="(vg) in props.listGames" class="slide-covers text-center flex items-center justify-center cursor-pointer h-full" @click="openModal(vg.id)">
+        <swiper-slide v-for="(vg) in props.listGames" class="border-[#26282a] bg-[#26282a] relative rounded-3xl slide-covers text-center flex items-center justify-center cursor-pointer h-[30vh] md:h-full" @click="openModal(vg.id)">
           <img class="rounded-3xl img-cover h-full" v-if="vg.cover" :src="vg.cover.url.replace('t_thumb', 't_720p')" :alt="vg.name"/>
-          <img v-else class="img-cover" :alt="vg.name" src=""/>
-          <span class="img-name absolute z-10 hidden">{{ vg.name }}</span>
+          <span v-if="vg.cover" class="img-name absolute z-10 hidden">{{ vg.name }}</span>
+          <p v-else class="img-cover flex justify-center items-center">{{ vg.name }}</p>
         </swiper-slide>
       </swiper>
       <button :class="'nextArrow' + idSlide" class="self-center sm:left-[96.3vw] rounded-[18.75px] text-black text-4xl absolute right-1 w-[45px] h-[45px] bg-gradient-to-r from-[#F18303] to-[#F94409] z-10">&gt;</button>

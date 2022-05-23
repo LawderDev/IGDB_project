@@ -1,10 +1,10 @@
 <template>
-  <div class="sm:px-20 px-5 mt-16 grid grid-cols-5 gap-7">
+  <div class="sm:px-20 px-5 mt-16 grid grid-cols-2 lg:grid-cols-5 gap-7">
     <spinner-loading v-if="loading"></spinner-loading>
-    <div v-else v-for="vg in games" :key="vg.id" class="slide-covers text-center flex justify-center cursor-pointer" @click="openModal(vg.id)">
-      <img v-if="vg.cover"  class="rounded-3xl img-cover"  :src="vg.cover.url.replace('t_thumb', 't_720p')" :alt="vg.name"/>
-      <img v-else src="" :alt="vg.name">
-      <span class="self-center img-name absolute z-10 hidden">{{ vg.name }}</span>
+    <div v-else v-for="vg in games" :key="vg.id" class="border-[#26282a] bg-[#26282a] relative rounded-3xl slide-covers text-center flex justify-center cursor-pointer h-[17.35rem] sm:h-[25.85rem] lg:h-[13.34rem] xl:h-[50vh]" @click="openModal(vg.id)">
+      <img v-if="vg.cover" class="rounded-3xl img-cover" :src="vg.cover.url.replace('t_thumb', 't_720p')" :alt="vg.name"/>
+      <span v-if="vg.cover" class="self-center img-name absolute z-10 hidden">{{ vg.name }}</span>
+      <p v-else class="img-cover flex justify-center items-center">{{ vg.name }}</p>
     </div>
   </div>
 </template>
