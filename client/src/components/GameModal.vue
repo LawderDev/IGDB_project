@@ -1,6 +1,9 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <TransitionRoot as="template" :show="store.state.openGameModal">
+  <div class="sticky top-[50%] left-[50%] z-10">
+    <spinner-loading v-if="state.loading" class="z-10"></spinner-loading>
+  </div>
+  <TransitionRoot as="template" :show="store.state.openGameModal && !state.loading">
     <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto" @close="store.state.openGameModal = false">
       <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <TransitionChild as="template"
@@ -22,8 +25,7 @@
                          leave="ease-in duration-200"
                          leave-from="opacity-100 translate-y-0 sm:scale-100"
                          leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-          <spinner-loading v-if="state.loading"></spinner-loading>
-          <div v-else class="relative inline-block align-bottom bg-[#303234] rounded-3xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-[90vw]">
+          <div class="relative inline-block align-bottom bg-[#303234] rounded-3xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-[90vw]">
               <div class="pb-4 text-white">
                 <div class="text-md sm:text-lg">
                   <div class="absolute">
@@ -32,8 +34,8 @@
                     </button>
                   </div>
                   <div class="max-h-[25vh] sm:max-h-[35vh] overflow-hidden rounded-3xl">
-                    <img class="w-full" v-if="state.game.artworks" :src="state.game.artworks[0].url.replace('t_thumb', 't_1080p')" :alt="state.game.id"/>
-                    <div class="h-[35vh] bg-gray-600 flex items-center justify-center" v-else>Aucun artwork disponible</div>
+                    <img v-if="state.game.artworks" :key="state.game.id" class="w-full" :src="state.game.artworks[0].url.replace('t_thumb', 't_1080p')" :alt="state.game.id"/>
+                    <div v-else class="h-[35vh] bg-gray-600 flex items-center justify-center" >Aucun artwork disponible</div>
                   </div>
 
                   <div class="absolute">
