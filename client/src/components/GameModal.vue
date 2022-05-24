@@ -34,8 +34,10 @@
                     </button>
                   </div>
                   <div class="max-h-[25vh] sm:max-h-[35vh] overflow-hidden rounded-3xl">
-                    <img v-if="state.game.artworks" :key="state.game.id" class="w-full" :src="state.game.artworks[0].url.replace('t_thumb', 't_1080p')" :alt="state.game.id"/>
-                    <div v-else class="h-[35vh] bg-gray-600 flex items-center justify-center" >Aucun artwork disponible</div>
+                    <spinner-loading v-if="!state.imageLoaded"></spinner-loading>
+                    <div v-if="state.imageLoaded === false" class="h-[25vh]  sm:h-[35vh] bg-gray-600 flex items-center justify-center"></div>
+                    <img v-if="state.game.artworks" @load="state.imageLoaded = true" :class="state.imageLoaded ? 'visible' : 'hidden' " :key="state.game.id" class="w-full animate-[fadeIn_0.25s_ease-in-out]" :src="state.game.artworks[0].url.replace('t_thumb', 't_1080p')" :alt="state.game.id"/>
+                    <div v-else class="h-[25vh]  sm:h-[35vh] bg-gray-600 flex items-center justify-center" >Aucun artwork disponible</div>
                   </div>
 
                   <div class="absolute">
@@ -100,6 +102,7 @@ defineEmits(['closeModal'])
 const state = reactive({
   game: {},
   loading: false,
+  imageLoaded: true,
 })
 
 
@@ -108,6 +111,8 @@ watch(() => store.state.selectedGame, (newId) => {
   getGameById(newId as number).then((res) => {
     state.game = res.data[0]
     state.loading = false
+    if(state.game.artworks)
+      state.imageLoaded = false
   })
 })
 

@@ -44,6 +44,15 @@ html{
   margin:0;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
