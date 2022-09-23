@@ -36,7 +36,7 @@ const openModal = (id:number) =>{
   <div class="sm:mt-16">
     <h2 class="sm:ml-20 sm:mb-5 sm:text-2xl text-[20px] mt-5 mb-2 ml-5">{{ title }}</h2>
     <div class="sm:gap-x-10 sm:px-20 flex px-5 justify-center mx-auto gap-x-4">
-      <button :class="'prevArrow' + idSlide" class="self-center sm:left-4 rounded-[18.75px] text-black text-4xl absolute left-1 w-[45px] h-[45px] bg-gradient-to-r from-[#F18303] to-[#F94409] z-10" >&lt;</button>
+      <button :class="'prevArrow' + idSlide" class="self-center sm:left-4 rounded-[18.75px] text-black text-4xl absolute left-1 w-[45px] h-[45px] bg-gradient-to-r from-[#F18303] to-[#F94409] z-[9]" >&lt;</button>
       <swiper
           :key="resetSwipe.value"
           :navigation="{ nextEl: '.nextArrow' + idSlide, prevEl: '.prevArrow' + idSlide }"
@@ -66,7 +66,7 @@ const openModal = (id:number) =>{
           <p v-else class="img-cover flex justify-center items-center">{{ vg.name }}</p>
         </swiper-slide>
       </swiper>
-      <button :class="'nextArrow' + idSlide" class="self-center sm:left-[96.3vw] rounded-[18.75px] text-black text-4xl absolute right-1 w-[45px] h-[45px] bg-gradient-to-r from-[#F18303] to-[#F94409] z-10">&gt;</button>
+      <button :class="'nextArrow' + idSlide" class="self-center sm:left-[96.3vw] rounded-[18.75px] text-black text-4xl absolute right-1 w-[45px] h-[45px] bg-gradient-to-r from-[#F18303] to-[#F94409] z-[9]">&gt;</button>
     </div>
     <secondary-button class="mt-8 ml-8">voir plus...</secondary-button>
   </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 const idIgdb = '70oadvd4vttwv5y41hwoy4nhb0vv3g'
-const accessToken = '3y6fpw10h74bf4ogzzv0iqcofr3f9n'
+const accessToken = 'ng8oauq95kuoaee3vod5xajfwt5t2t'
 const typeToken = 'Bearer'
 const headers = {
     "Content-Type": "text/plain",
